@@ -1,4 +1,4 @@
-;; $Id: modes.el,v 1.2 2002-07-16 16:15:27 cookgb Exp $
+;; $Id: modes.el,v 1.3 2002-07-18 18:08:44 cookgb Exp $
 ;;-----------------------------------------------------------------------------
 
 ;; Load cc-mode instead of c-mode & cplus-md
@@ -37,28 +37,17 @@
 
 ;; Set up hooks
 (setq fortran-mode-hook '(lambda ()
+			   (setq fortran-comment-region "c-:")
 			   (define-key fortran-mode-map "\C-c:"
 			     (lambda (b e)
 			       "Uncomments region."
 			       (interactive "*r")
-			       (general-comment-region b e "c$$$" t)))
-			   (define-key fortran-mode-map "\C-c;"
-			     (lambda (b e)
-			       "Comments region."
-			       (interactive "*r")
-			       (general-comment-region b e "c$$$" nil)))))
+			       (fortran-comment-region b e 1)))))
 
 (setq f90-mode-hook '(lambda ()
+		       (setq f90-comment-region "!-:")
 		       (define-key f90-mode-map "\C-c:"
-			 (lambda (b e)
-			   "Uncomments region."
-			   (interactive "*r")
-			   (general-comment-region b e "!$$$" t)))
-		       (define-key f90-mode-map "\C-c;"
-			 (lambda (b e)
-			   "Comments region."
-			   (interactive "*r")
-			   (general-comment-region b e "!$$$" nil)))
+			 'f90-comment-region)
 		       ;; Add f90-font-lock-keywords-5 to defaults list
 		       ;; This adds better highlighing
 		       (setq font-lock-defaults 
@@ -72,79 +61,48 @@
 (setq c-mode-common-hook '(lambda ()
 			    (turn-on-font-lock)))
 
-(setq c-mode-hook 'nil)
+(setq c-mode-hook '(lambda ()
+		       (setq comment-padding " ")
+		       (define-key c-mode-map "\C-c;" 'comment-region)
+		       (define-key c-mode-map "\C-c:" 'uncomment-region)))
+;;		       (define-key c-mode-map "\C-c:"
+;;			 (lambda (b e)
+;;			   "Uncomments region."
+;;			   (interactive "*r")
+;;			   (comment-region b e '(4))))
+;;		       (define-key c-mode-map "\C-c;"
+;;			 'comment-region)))
 
 (setq c++-mode-hook '(lambda ()
-		       (define-key c++-mode-map "\C-c:"
-			 (lambda (b e)
-			   "Uncomments region."
-			   (interactive "*r")
-			   (general-comment-region b e "//##" t)))
-		       (define-key c++-mode-map "\C-c;"
-			 (lambda (b e)
-			   "Comments region."
-			   (interactive "*r")
-			   (general-comment-region b e "//##" nil)))))
+		       (setq comment-start "//")
+		       (setq comment-padding "-:")
+		       (define-key c++-mode-map "\C-c;" 'comment-region)
+		       (define-key c++-mode-map "\C-c:" 'uncomment-region)))
 
 (setq tex-mode-hook '(lambda ()
-		       (define-key tex-mode-map "\C-c:"
-			 (lambda (b e)
-			   "Uncomments region."
-			   (interactive "*r")
-			   (general-comment-region b e "%###" t)))
-		       (define-key tex-mode-map "\C-c;"
-			 (lambda (b e)
-			   "Comments region."
-			   (interactive "*r")
-			   (general-comment-region b e "%###" nil)))))
-
-;;;; Seems there is no latex-mode-map, just tex-mode-map...
-;;(setq latex-mode-hook '(lambda ()
-;;			 (define-key latex-mode-map "\C-c:"
-;;			   (lambda (b e)
-;;			     "Uncomments region."
-;;			     (interactive "*r")
-;;			     (general-comment-region b e "%###" t)))
-;;			 (define-key latex-mode-map "\C-c;"
-;;			   (lambda (b e)
-;;			     "Uncomments region."
-;;			     (interactive "*r")
-;;			     (general-comment-region b e "%###" nil)))))
+		       (setq comment-start "%")
+		       (setq comment-padding "-:")
+		       (define-key tex-mode-map "\C-c;" 'comment-region)
+		       (define-key tex-mode-map "\C-c:" 'uncomment-region)))
 
 (setq perl-mode-hook '(lambda ()
-			(define-key perl-mode-map "\C-c:"
-			  (lambda (b e)
-			    "Uncomments region."
-			    (interactive "*r")
-			    (general-comment-region b e "#%%%" t)))
-			(define-key perl-mode-map "\C-c;"
-			  (lambda (b e)
-			    "Comments region."
-			    (interactive "*r")
-			    (general-comment-region b e "#%%%" nil)))))
+			(setq comment-start "#")
+			(setq comment-padding "-:")
+			(define-key perl-mode-map "\C-c;" 'comment-region)
+			(define-key perl-mode-map "\C-c:" 'uncomment-region)))
 
 (setq makefile-mode-hook '(lambda ()
-			    (define-key makefile-mode-map "\C-c:"
-			      (lambda (b e)
-				"Uncomments region."
-				(interactive "*r")
-				(general-comment-region b e "#%%%" t)))
-			    (define-key makefile-mode-map "\C-c;"
-			      (lambda (b e)
-				"Comments region."
-				(interactive "*r")
-				(general-comment-region b e "#%%%" nil)))))
+			    (setq comment-start "#")
+			    (setq comment-padding "-:")
+			    (define-key makefile-mode-map "\C-c;" 
+			      'comment-region)
+			    (define-key makefile-mode-map "\C-c:" 
+			      'uncomment-region)))
 
 (setq emacs-lisp-mode-hook '(lambda ()
-			      (define-key emacs-lisp-mode-map "\C-c:"
-				(lambda (b e)
-				  "Uncomments region."
-				  (interactive "*r")
-				  (general-comment-region b e ";;" t)))
-			      (define-key emacs-lisp-mode-map "\C-c;"
-				(lambda (b e)
-				  "Comments region."
-				  (interactive "*r")
-				  (general-comment-region b e ";;" nil)))))
-
-
+			      (setq comment-start ";;")
+			      (setq comment-padding "-:")
+			      (define-key emacs-lisp-mode-map "\C-c;" 
+				'comment-region)
+			      (define-key emacs-lisp-mode-map "\C-c:" 
+				'uncomment-region)))
