@@ -1,3 +1,26 @@
+;; Are we running XEmacs or Emacs?
+(defvar running-xemacs (string-match "XEmacs\\|Lucid" emacs-version))
+ 
+;; Set up the keyboard so the delete key on both the regular keyboard
+;; and the keypad delete the character under the cursor and to the right
+;; under X, instead of the default, backspace behavior.
+(global-set-key [delete] 'delete-char)
+(global-set-key [kp-delete] 'delete-char)
+
+;; Visual feedback on selections
+(setq-default transient-mark-mode t)
+
+;; Always end a file with a newline
+(setq require-final-newline t)
+
+;; Stop at the end of the file, not just add lines
+(setq next-line-add-newlines nil)
+
+;; Enable wheelmouse support by default
+(cond (window-system
+       (mwheel-install)
+))
+
 (setq load-path (append (list "~cookgb/public/emacs") load-path))
 
 (load "my-font-lock")
@@ -5,19 +28,16 @@
 (load "comment")
 (load "modes")
 
+;; Turn on font-lock mode for Emacs
+(cond ((not running-xemacs)
+       (global-font-lock-mode t)
+))
+
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (add-hook 'latex-mode-hook 'turn-on-reftex)
 
-(global-font-lock-mode t)
- 
 (setq tex-dvi-view-command "xdvi")
 (setq tex-dvi-print-command "dviprint")
- 
-;; Set up the keyboard so the delete key on both the regular keyboard
-;; and the keypad delete the character under the cursor and to the right
-;; under X, instead of the default, backspace behavior.
-(global-set-key [delete] 'delete-char)
-(global-set-key [kp-delete] 'delete-char)
 
 ;; Eval-expression
 (put 'eval-expression 'disabled nil)
