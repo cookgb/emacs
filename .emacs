@@ -22,21 +22,23 @@
 ;; Eval-expression
 (put 'eval-expression 'disabled nil)
 
+;; Disable new Menu bar
+(tool-bar-mode nil)     
+
 ;;(setq font-lock-display-type "grayscale")
 
 (custom-set-variables
- '(fortran-do-indent 2)
- '(fortran-structure-indent 2)
- '(fortran-blink-matching-if t)
- '(fortran-if-indent 2)
- '(scroll-bar-mode (quote right))
- '(fortran-continuation-string "."))
+  ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
+  ;; Your init file should contain only one such instance.
+ '(c-basic-offset 2)
+ '(c-offsets-alist nil)
  '(f90-do-indent 2)
  '(f90-if-indent 2)
  '(f90-type-indent 2)
- '(f90-comment-region "!$$$")
- '(c-basic-offset 2)
- '(query-replace-highlight t)
- '(column-number-mode t)
- '(scroll-bar-mode (quote right))
+ '(fortran-blink-matching-if t)
+ '(fortran-continuation-string ".")
+ '(fortran-do-indent 2)
+ '(fortran-if-indent 2)
+ '(fortran-structure-indent 2)
+ '(scroll-bar-mode (quote right)))
 (custom-set-faces)

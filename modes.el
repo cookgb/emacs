@@ -1,4 +1,4 @@
-;; $Id: modes.el,v 1.3 2002-07-18 18:08:44 cookgb Exp $
+;; $Id: modes.el,v 1.4 2002-07-18 19:12:10 cookgb Exp $
 ;;-----------------------------------------------------------------------------
 
 ;; Load cc-mode instead of c-mode & cplus-md
@@ -46,8 +46,11 @@
 
 (setq f90-mode-hook '(lambda ()
 		       (setq f90-comment-region "!-:")
-		       (define-key f90-mode-map "\C-c:"
-			 'f90-comment-region)
+		       (setq general-comment-region "!-:")
+		       (define-key f90-mode-map "\C-c;" 
+			 'general-comment-region)
+		       (define-key f90-mode-map "\C-c:" 
+			 'general-uncomment-region)
 		       ;; Add f90-font-lock-keywords-5 to defaults list
 		       ;; This adds better highlighing
 		       (setq font-lock-defaults 
@@ -65,44 +68,42 @@
 		       (setq comment-padding " ")
 		       (define-key c-mode-map "\C-c;" 'comment-region)
 		       (define-key c-mode-map "\C-c:" 'uncomment-region)))
-;;		       (define-key c-mode-map "\C-c:"
-;;			 (lambda (b e)
-;;			   "Uncomments region."
-;;			   (interactive "*r")
-;;			   (comment-region b e '(4))))
-;;		       (define-key c-mode-map "\C-c;"
-;;			 'comment-region)))
 
 (setq c++-mode-hook '(lambda ()
 		       (setq comment-start "//")
 		       (setq comment-padding "-:")
-		       (define-key c++-mode-map "\C-c;" 'comment-region)
-		       (define-key c++-mode-map "\C-c:" 'uncomment-region)))
+		       (setq general-comment-region "//-:")
+		       (define-key c++-mode-map "\C-c;" 
+			 'general-comment-region)
+		       (define-key c++-mode-map "\C-c:" 
+			 'general-uncomment-region)))
 
 (setq tex-mode-hook '(lambda ()
-		       (setq comment-start "%")
-		       (setq comment-padding "-:")
-		       (define-key tex-mode-map "\C-c;" 'comment-region)
-		       (define-key tex-mode-map "\C-c:" 'uncomment-region)))
+		       (setq general-comment-region "%-:")
+		       (define-key tex-mode-map "\C-c;" 
+			 'general-comment-region)
+		       (define-key tex-mode-map "\C-c:" 
+			 'general-uncomment-region)))
 
 (setq perl-mode-hook '(lambda ()
-			(setq comment-start "#")
-			(setq comment-padding "-:")
-			(define-key perl-mode-map "\C-c;" 'comment-region)
-			(define-key perl-mode-map "\C-c:" 'uncomment-region)))
+			(setq general-comment-region "#-:")
+			(define-key perl-mode-map "\C-c;" 
+			  'general-comment-region)
+			(define-key perl-mode-map "\C-c:" 
+			  'general-uncomment-region)))
 
 (setq makefile-mode-hook '(lambda ()
-			    (setq comment-start "#")
-			    (setq comment-padding "-:")
+			    (setq general-comment-region "#-:")
 			    (define-key makefile-mode-map "\C-c;" 
-			      'comment-region)
+			      'general-comment-region)
 			    (define-key makefile-mode-map "\C-c:" 
-			      'uncomment-region)))
+			      'general-uncomment-region)))
 
 (setq emacs-lisp-mode-hook '(lambda ()
-			      (setq comment-start ";;")
-			      (setq comment-padding "-:")
+		       (setq comment-start ";;")
+		       (setq comment-padding "-:")
+			      (setq general-comment-region ";;-:")
 			      (define-key emacs-lisp-mode-map "\C-c;" 
-				'comment-region)
+				'general-comment-region)
 			      (define-key emacs-lisp-mode-map "\C-c:" 
-				'uncomment-region)))
+				'general-uncomment-region)))
