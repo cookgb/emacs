@@ -1,0 +1,22 @@
+Place the .emacs file in the top level or your home directory and edit the
+first line in this file to point to the directory that this file is in.
+
+     (setq load-path (append (list "~cookgb/public/emacs") load-path))
+                                   ^^^^^^^^^^^^^^^^^^^^^^
+
+For faster loading of the four files:
+             my-font-lock.el
+             keymap.el
+             comment.el
+             modes.el
+you can "byte-compile" them.  This is easily done by typing the following
+command in the emacs editor:
+
+	[esc]x byte-compile-file [return]
+
+Emacs will then ask the name of the file to compile.  Enter one of the
+file names and press return.  Repeat the proceedure for each of the 
+four files.  {Note: [esc]x means press the escape key and keep it depressed
+while pressing the x key.}
+
+
