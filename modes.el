@@ -1,4 +1,4 @@
-;; $Id: modes.el,v 1.1.1.1 2001-07-02 18:35:13 cookgb Exp $
+;; $Id: modes.el,v 1.2 2002-07-16 16:15:27 cookgb Exp $
 ;;-----------------------------------------------------------------------------
 
 ;; Load cc-mode instead of c-mode & cplus-md
@@ -79,12 +79,12 @@
 			 (lambda (b e)
 			   "Uncomments region."
 			   (interactive "*r")
-			   (comment-region b e -1)))
+			   (general-comment-region b e "//##" t)))
 		       (define-key c++-mode-map "\C-c;"
 			 (lambda (b e)
 			   "Comments region."
 			   (interactive "*r")
-			   (comment-region b e)))))
+			   (general-comment-region b e "//##" nil)))))
 
 (setq tex-mode-hook '(lambda ()
 		       (define-key tex-mode-map "\C-c:"
