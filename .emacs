@@ -52,6 +52,7 @@
   ;; Your init file should contain only one such instance.
  '(c-basic-offset 2)
  '(c-offsets-alist nil)
+ '(delete-selection-mode t nil (delsel))
  '(f90-do-indent 2)
  '(f90-if-indent 2)
  '(f90-type-indent 2)
@@ -60,5 +61,9 @@
  '(fortran-do-indent 2)
  '(fortran-if-indent 2)
  '(fortran-structure-indent 2)
- '(scroll-bar-mode (quote right)))
-(custom-set-faces)
+ '(scroll-bar-mode (quote right))
+ '(transient-mark-mode nil))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
+  ;; Your init file should contain only one such instance.
+ )
