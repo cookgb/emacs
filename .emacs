@@ -18,6 +18,7 @@
 ;; have reftex added when in LaTeX mode
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (add-hook 'latex-mode-hook 'turn-on-reftex)
+(setq reftex-ref-macro-prompt nil)
                                                                                 
 (setq tex-dvi-view-command "xdvi")
 (setq tex-dvi-print-command "dviprint")
