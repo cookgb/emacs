@@ -23,6 +23,8 @@
 (setq tex-dvi-view-command "xdvi")
 (setq tex-dvi-print-command "dviprint")
 
+(setq inhibit-splash-screen t)
+
 ;; Old commands that I don't know if we need any more...
 ;;
 ;;(global-set-key [delete] 'delete-char)
